@@ -11,5 +11,11 @@
 <%@ page import="com.liferay.docs.guestbook.service.EntryLocalServiceUtil" %>
 <%@ page import="com.liferay.docs.guestbook.service.GuestbookLocalServiceUtil" %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ page import="com.liferay.docs.guestbook.service.permission.GuestbookModelPermission" %>
+<%@ page import="com.liferay.docs.guestbook.service.permission.GuestbookPermission" %>
+<%@ page import="com.liferay.docs.guestbook.service.permission.EntryPermission" %>
+
 <portlet:defineObjects />
 <theme:defineObjects />
