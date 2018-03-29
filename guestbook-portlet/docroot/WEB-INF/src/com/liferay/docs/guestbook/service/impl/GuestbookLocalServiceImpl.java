@@ -24,6 +24,8 @@ import com.liferay.docs.guestbook.service.EntryLocalServiceUtil;
 import com.liferay.docs.guestbook.service.base.GuestbookLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -91,6 +93,10 @@ public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 
 		resourceLocalService.addResources(user.getCompanyId(), groupId, userId, Guestbook.class.getName(), guestbookId,
 				false, true, true);
+		
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+            Guestbook.class);
+		indexer.reindex(guestbook);
 
 		return guestbook;
 	}
@@ -117,6 +123,10 @@ public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 		resourceLocalService.updateResources(serviceContext.getCompanyId(), serviceContext.getScopeGroupId(), name,
 				guestbookId, serviceContext.getGroupPermissions(), serviceContext.getGuestPermissions());
 
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+             Guestbook.class);
+		indexer.reindex(guestbook);
+		
 		return guestbook;
 	}
 
@@ -135,6 +145,10 @@ public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 				ResourceConstants.SCOPE_INDIVIDUAL, guestbookId);
 
 		guestbook = deleteGuestbook(guestbook);
+		
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+                Guestbook.class);
+		indexer.delete(guestbook);
 
 		return guestbook;
 	}

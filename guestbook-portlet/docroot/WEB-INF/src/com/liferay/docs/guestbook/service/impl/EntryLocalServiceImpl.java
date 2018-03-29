@@ -24,6 +24,8 @@ import com.liferay.docs.guestbook.model.Entry;
 import com.liferay.docs.guestbook.service.base.EntryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -107,7 +109,10 @@ public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 	    entryPersistence.update(entry);
 
 	    resourceLocalService.addResources(user.getCompanyId(), groupId, userId,
-	    	       Entry.class.getName(), entryId, false, true, true);
+    	       Entry.class.getName(), entryId, false, true, true);
+	    
+	    Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Entry.class);
+	    indexer.reindex(entry);
 	    
 	    return entry;
 	}
@@ -121,9 +126,12 @@ public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 	        serviceContext.getCompanyId(), Entry.class.getName(),
 	        ResourceConstants.SCOPE_INDIVIDUAL, entryId);
 
-	        entry = deleteEntry(entryId);
+        entry = deleteEntry(entryId);
 
-	        return entry;
+        Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Entry.class);
+        indexer.delete(entry);
+        
+        return entry;
 	}
 	
 	public Entry updateEntry(
@@ -156,6 +164,10 @@ public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 	        serviceContext.getGroupPermissions(),
 	        serviceContext.getGuestPermissions());
 
+	    Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+            Entry.class);
+	    indexer.reindex(entry);
+	    
 	    return entry;
 	}
 }
