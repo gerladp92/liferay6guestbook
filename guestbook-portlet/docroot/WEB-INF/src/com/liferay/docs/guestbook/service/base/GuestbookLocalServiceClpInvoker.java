@@ -144,6 +144,23 @@ public class GuestbookLocalServiceClpInvoker {
 				"long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName54 = "updateGuestbook";
+
+		_methodParameterTypes54 = new String[] {
+				"long", "long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName55 = "deleteGuestbook";
+
+		_methodParameterTypes55 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName56 = "getGuestbooksCount";
+
+		_methodParameterTypes56 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -290,6 +307,25 @@ public class GuestbookLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[2]);
 		}
 
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+			return GuestbookLocalServiceUtil.updateGuestbook(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2],
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
+		}
+
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			return GuestbookLocalServiceUtil.deleteGuestbook(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			return GuestbookLocalServiceUtil.getGuestbooksCount(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -343,4 +379,10 @@ public class GuestbookLocalServiceClpInvoker {
 	private String[] _methodParameterTypes51;
 	private String _methodName53;
 	private String[] _methodParameterTypes53;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
 }
