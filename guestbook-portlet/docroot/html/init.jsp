@@ -1,3 +1,4 @@
+<%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
@@ -16,6 +17,12 @@
 <%@ page import="com.liferay.docs.guestbook.service.permission.GuestbookModelPermission" %>
 <%@ page import="com.liferay.docs.guestbook.service.permission.GuestbookPermission" %>
 <%@ page import="com.liferay.docs.guestbook.service.permission.EntryPermission" %>
+
+<%@ page import="com.liferay.portal.kernel.dao.search.SearchEntry" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
+<%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
+<%@ page import="com.liferay.docs.guestbook.model.Entry" %>
+<%@ page import="com.liferay.docs.guestbook.util.WebKeys" %>
 
 <portlet:defineObjects />
 <theme:defineObjects />
